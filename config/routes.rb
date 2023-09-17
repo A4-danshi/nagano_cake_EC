@@ -1,47 +1,30 @@
 Rails.application.routes.draw do
+  root to: "public/homes#top"
+  get '/about' => 'public/homes#about', as: 'about'
+
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :items, except: [:destroy]
+    root to: "homes#top"
   end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
+
   namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/complete'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/confirm'
-  end
-  namespace :public do
-    get 'items/show'
-    get 'items/index'
+    resources :items, only: [:index, :show]
+    resources :customers, only: [:confirm, :withdrawal]
+    get "customers/mypage" => "customers#show", as: 'customer'
+    get "customers/infomation/edit" => "customers#edit", as: 'customer_edit'
+    patch "customers/infomation" => "customers#update", as: 'customer_update'
+    get "customers/confirm" => "customers#confirm", as: 'customer_confirm'
+    patch "customers/withdrawal" => "customers#withdrawal", as: 'customer_withdrawal'
+    resources :addresses, except: [:new]
+    resources :orders, only: [:new, :create, :index, :show]
+    post "orders/confirm" => "orders#confirm", as: 'order_confirm'
+    get "orders/complete" => "orders#conplete", as: 'order_complete'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete "cart_items/destroy_all" => "cart_items#destroy_all", as: 'cart_items_destroy_all'
   end
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
