@@ -1,2 +1,11 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<% if admin_signed_in? %>
+  <li>
+    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to "ログイン", new_admin_session_path %>
+  </li>
+<% end %>
+
+<h1>注文履歴一覧</h1>
