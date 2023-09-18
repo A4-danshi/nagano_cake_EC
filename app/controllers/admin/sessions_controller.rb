@@ -25,7 +25,7 @@ class Admin::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_in_path_for(resource)
-    admin_homes_top_path
+    admin_root_path
   end
 
   def after_sign_out_path_for(resource)
