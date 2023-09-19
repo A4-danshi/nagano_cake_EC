@@ -6,21 +6,21 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-3 mr-5">
-            <%= image_tag @item.get_item_image %>
+          <div class="col-4">
+            <%= image_tag @item.get_item_image, width: '100%' %>
           </div>
-          <div class="col-6 offset-2">
-            <table class='table table-hover table-inverse'>
+          <div class="col-8">
+            <table class='table table-borderless'>
               <tr><th>商品名</th><td><%= @item.name %></td></tr>
               <tr><th>商品説明</th><td><%= @item.introduction %></td></tr>
               <tr><th>ジャンル</th><td><%= @item.genre.name %></td></tr>
-              <tr><th>税込み価格<br>(税抜き価格)</th><td class="align-middle"><%= (@item.price * 1.1).floor %>&nbsp;(<%= @item.price %>)&nbsp;円</td></tr>
+              <tr><th>税込み価格<br>(税抜き価格)</th><td class="align-middle"><%= ((@item.price * 1.1).floor).to_s(:delimited) %>&nbsp;(<%= @item.price.to_s(:delimited) %>)&nbsp;円</td></tr>
               <tr>
                 <th>販売ステータス</th>
                 <% if @item.is_sale == true %>
-                  <td><%= "販売中" %></td>
+                  <td class="text-success font-weight-bold"><%= "販売中" %></td>
                 <% else %>
-                  <td><%= "販売停止中" %></td>
+                  <td class="text-secondary font-weight-bold"><%= "販売停止中" %></td>
                 <% end %>
               </tr>
             </table>
