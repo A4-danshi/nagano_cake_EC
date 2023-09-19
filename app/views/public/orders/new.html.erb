@@ -52,7 +52,7 @@
             <div class="col-6">
               <p><%= f.text_field :post_code, placeholder: "0000000", size: "10" %></p>
               <p><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", size: "40x20" %></p>
-              <p><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", size: "40x20" %></p>
+              <p><%= f.text_field :name, placeholder: "令和道子", size: "40x20" %></p>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
       <% end %>
 
       <div class="actions col-6 mx-auto">
-        <%= link_to "確認画面へ進む", public_order_confirm_path, method: :post,  class: "btn btn-primary mt-3 mb-5" %>
+        <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-3 mb-5" %>
       </div>
     </div>
   </div>

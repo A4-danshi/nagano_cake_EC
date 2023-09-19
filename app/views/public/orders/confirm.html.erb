@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mt-5">
+      <h1>注文情報確認画面</h1>
+    </div>
+    <div class="col-6 mt-5">
+      <table class="table table-bordered">
+        <% @cart_items.each do |cart_item| %>
+        <thead class="thead-light">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= image_tag item_image.item.get_item_image %>
+                <%= cart_item.item.name %></td>
+            <td><%= cart.item.item.with_tax_price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.subtotal %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4 mt-5">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="table-secondary">送料</th>
+              <td><%= @order.postage %>円</td>
+            </tr>
+          <tr>
+            <th class="table-secondary">商品合計</th>
+              <td><%= @order.total_payment %>円</td>
+          </tr>
+          <tr>
+            <th class="table-secondary">請求金額</th>
+              <td><%= @order.postage + @order.total_payment %>円</td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-12">
+      <table  class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>支払方法</th>
+            <td><%= @order.payment_method %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      <table  class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>お届け先</th>
+            <td>〒<%= @order.post_code %></td>
+            <td><%= @order.address %></td>
+            <td><%= @order.name %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="active">
+      <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
+    </div>
+  </div>
+</div>
+
