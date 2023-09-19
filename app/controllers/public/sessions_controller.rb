@@ -27,18 +27,14 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
 
+  # 退会済みの会員がログインできない機能
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
-      if !@customer
-        if @customer.valid_password?(params[:customer][:email]) && (@customer.is_deleted == true)
-          flash[:notice] = "退会済みです。"
+    return if !@customer
+        if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
+          flash[:notice] = "退会済みです。新たに会員登録するか、お問い合わせください。"
           redirect_to new_customer_registration_path
-        else
-          flash[:notice] = "項目を入力してください。"
         end
-      else
-      flash[:notice] = "該当するユーザーがみつかりません。"
-      end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
