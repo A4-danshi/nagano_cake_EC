@@ -10,7 +10,6 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    # @item.genre_id = params[:id][:name]
     if @item.save
       redirect_to admin_item_path(@item)
     else
@@ -31,7 +30,7 @@ class Admin::ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to admin_item_path(@item)
     else
-      rende "edit"
+      render "edit"
     end
   end
 
