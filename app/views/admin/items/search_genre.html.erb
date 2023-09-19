@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='col-md-10 offset-md-1 mb-5'>
       <div class="row m-5 align-items-center">
-        <h2 class="bg-light">&nbsp;商品一覧&nbsp;</h2>
+        <h2 class="bg-light">&nbsp;「<%= @genre.name %>」ジャンルの商品一覧&nbsp;</h2>
         <div class="m-3 ml-auto">
           <%= link_to "＋", new_admin_item_path, class: "btn btn-light btn-lg rounded-circle p-3 shadow font-weight-bold", :style => "width:4rem; height:4rem;" %>
         </div>
@@ -38,8 +38,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div>
-  <%= render 'layouts/genre_search', genres: @genres %>
 </div>

@@ -2,6 +2,7 @@ class Admin::ItemsController < ApplicationController
   def index
     @items = Item.page(params[:page])
     @item = Item.new
+    @genres = Genre.all
   end
 
   def new
@@ -32,6 +33,11 @@ class Admin::ItemsController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def search_genre
+    @genre = Genre.find(params[:id])
+    @items = @genre.items.page(params[:page])
   end
 
   private

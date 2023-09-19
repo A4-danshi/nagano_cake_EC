@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    get "search/genre/:id" => "items#search_genre" ,as: "search_genre"
     root to: "homes#top"
   end
 
