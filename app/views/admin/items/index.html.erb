@@ -4,7 +4,7 @@
       <div class="row m-5 align-items-center">
         <h2 class="bg-light">&nbsp;商品一覧&nbsp;</h2>
         <div class="m-3 ml-auto">
-          <%= link_to "新規作成", new_admin_item_path, class: "btn btn-primary" %>
+          <%= link_to "＋", new_admin_item_path, class: "btn btn-light btn-lg rounded-circle p-3 shadow font-weight-bold", :style => "width:4rem; height:4rem;" %>
         </div>
       </div>
       <table class='table'>
@@ -17,22 +17,25 @@
             <th>ステータス</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-borderless">
           <% @items.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td><%= link_to item.name,admin_item_path(item) %></td>
-              <td><%= item.price %></td>
+              <td><%= link_to item.name,admin_item_path(item), :style => "color:black; text-decoration:underline" %></td>
+              <td><%= item.price.to_s(:delimited) %></td>
               <td><%= item.genre.name %></td>
               <% if item.is_sale == true %>
-                <td><%= "販売中" %></td>
+                <td class="text-success font-weight-bold"><%= "販売中" %></td>
               <% else %>
-                <td><%= "販売停止中" %></td>
+                <td class="text-secondary font-weight-bold"><%= "販売停止中" %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <div class="row justify-content-center">
+        <%= paginate @items %>
+      </div>
     </div>
   </div>
 </div>
