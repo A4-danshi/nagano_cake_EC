@@ -5,7 +5,7 @@
         <h2 class="bg-light">&nbsp;新規商品登録&nbsp;</h2>
       </div>
       <div class="col-md-6 mx-auto">
-        <%= form_with model:@item, url: admin_items_path, local:true do |f| %>
+        <%= form_with model:@item, url: admin_items_path, local: true do |f| %>
           <%= render 'layouts/errors', obj: @item %>
           <div class="form-group">
             <%= f.label :商品画像 %>
