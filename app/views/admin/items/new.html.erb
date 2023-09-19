@@ -1,2 +1,50 @@
-<h1>Admin::Items#new</h1>
-<p>Find me in app/views/admin/items/new.html.erb</p>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-10 offset-md-1 mb-5'>
+      <div class="row m-5 align-items-center">
+        <h2 class="bg-light">&nbsp;新規商品登録&nbsp;</h2>
+      </div>
+      <div class="col-md-6 mx-auto">
+        <%= form_with model:@item, url: admin_items_path, local: true do |f| %>
+          <%= render 'layouts/errors', obj: @item %>
+          <div class="form-group">
+            <%= f.label :商品画像 %>
+            <%= f.file_field :item_image, class: "form-control-file item_image", accept: 'image/*' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :商品名 %>
+            <%= f.text_field :name, placeholder: "商品名", class: 'form-control item_name' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :商品説明 %>
+            <%= f.text_area :introduction, placeholder: "ここに説明文を記述します", class: 'form-control item_introduction' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :ジャンル %>
+            <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), {prompt: "選択してください"}, class: 'form-control item_genre' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :税抜き価格 %>
+            <%= f.text_field :price, placeholder: "1000", class: 'form-control item_price' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :販売ステータス %>
+            <div class="form_check form-check-inline">
+              <%= f.radio_button :is_sale, true, class: "form-check-input item_is_sale" %>
+              <%= f.label :is_sale_true, "販売中" %>
+            </div>
+            <div class="form_check form-check-inline">
+              <%= f.radio_button :is_sale, false, class: "form-check-input item_is_sale" %>
+              <%= f.label :is_sale_false, "販売停止中" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="mx-auto">
+            <%= f.submit "新規登録", class: 'btn btn-lg btn-success' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
