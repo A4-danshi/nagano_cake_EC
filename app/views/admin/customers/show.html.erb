@@ -3,7 +3,7 @@
     <div>
       <h2 class="bg-light"><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
       <div>
-        <table class="table">
+        <table class="table table-borderless">
           <tbody>
             <tr>
               <td>会員ID</td>
@@ -36,6 +36,11 @@
             <tr>
               <td>会員ステータス</td>
               <td><%= @customer.is_deleted %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= link_to "編集する", edit_admin_customer_path(@customer), class:"btn btn-success" %></td>
+              <td><%= link_to "注文履歴一覧を見る", class:"btn btn-primary" %></td>
             </tr>
           </tbody>
         </table>
