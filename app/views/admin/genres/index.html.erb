@@ -8,13 +8,13 @@
         <%= form_with model:@genre, url: admin_genres_path, local: true do |f| %>
           <%= render 'layouts/errors', obj: @genre %>
           <div class="form-group align-items-center">
-          <table class="table table-borderless">
-            <tr>
-            <td><p class="font-weight-bold"><%= f.label :ジャンル名 %></p></td>
-            <td><%= f.text_field :name, placeholder: "ジャンル名", class: 'genre_name' %></td>
-            <td><%= f.submit "新規登録", class: 'btn btn-success' %></td>
-            </tr>
-          </table>
+            <table class="table table-borderless">
+              <tr>
+                <td><p class="font-weight-bold"><%= f.label :ジャンル名 %></p></td>
+                <td><%= f.text_field :name, placeholder: "ジャンル名", class: 'genre_name' %></td>
+                <td><%= f.submit "新規登録", class: 'btn btn-success' %></td>
+              </tr>
+            </table>
           </div>
         <% end %>
       </div>
