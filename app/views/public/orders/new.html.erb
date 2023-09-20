@@ -3,37 +3,26 @@
     <div class="col-md-12 mt-5 mx-auto">
       <h1>注文情報入力</h1>
       <%= form_with model: @order, url: public_order_confirm_path, method: :post do |f| %>
-
       <div class="payment_method mt-5">
         <strong>支払方法</strong>
         <div class="form_group">
           <div class="form_check ml-5">
-            <%= f.radio_button :payment_method, "credit_card" %>
-            <%= f.label :payment_method_credit_card, "クレジットカード" %>
+            <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+            <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
           </div>
           <div class="form_check ml-5">
-            <%= f.radio_button :payment_method, "transfer" %>
-            <%= f.label :payment_method_transfer, "銀行振込" %>
+            <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+            <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
           </div>
         </div>
-
-
-    <!--enum導入時-->
-      <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-      <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
-
-      <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-      <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
       </div>
-      
-
       <div class="address mt-3">
       <strong>お届け先</strong>
         <div class="form-group ml-5">
           <%= f.radio_button :select_address, "0", checked: true %>
           <%= f.label :select_address, "ご自身の住所" %>
-          <p class="form_check ml-3">〒<%= current_customer.post_code %><%= current_customer.address %></p>
-          <p class="form_check ml-3"><%= current_customer.last_name %><%= current_customer.first_name %></p>
+          <p>〒<%= current_customer.post_code %><%= current_customer.address %></p>
+          <p><%= current_customer.last_name %><%= current_customer.first_name %></p>
         </div>
         <div class="form_group ml-5">
           <%= f.radio_button :select_address, "1" %>
@@ -57,11 +46,10 @@
           </div>
         </div>
       </div>
-      <% end %>
-
       <div class="actions col-6 mx-auto">
         <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-3 mb-5" %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
