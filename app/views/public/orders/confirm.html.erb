@@ -29,17 +29,18 @@
     <div class="col-4 mt-5">
       <table class="table table-bordered">
         <tbody>
+          <thead class="thead-light">
           <tr>
-            <th class="table-secondary">送料</th>
+            <th>送料</th>
               <td><%= @order.postage %>円</td>
             </tr>
           <tr>
-            <th class="table-secondary">商品合計</th>
-              <td><%= total_payment %>円</td>
+            <th>商品合計</th>
+              <td><%= @order.total_payment %>円</td>
           </tr>
           <tr>
-            <th class="table-secondary">請求金額</th>
-              <td><%= total_payment + @order.postage %>円</td>
+            <th>請求金額</th>
+              <td><%= @order. %>円</td>
            </tr>
         </tbody>
       </table>
@@ -61,10 +62,11 @@
       <%= f.hidden_field :post_code, value: @order.post_code %>
       <%= f.hidden_field :address, value: @order.address %>
       <%= f.hidden_field :name, value: @order.name %>
+      <%= f.hidden_field :total_payment, value: @order.total_payment %>
+      <%= f.hidden_field :status %>
       <%= f.hidden_field :customer_id %>
       <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
       <% end %>
     </div>
   </div>
 </div>
-
