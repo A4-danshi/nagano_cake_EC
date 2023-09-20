@@ -1,2 +1,32 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<div class="container cake-font">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">配送先登録/一覧</h4>
+
+      <%= render "form", address: @address %>
+
+      <table class="table table-bordered">
+        <thead class="bg-ligth">
+          <tr>
+            <th>郵便番号</th>
+            <th>住所</th>
+            <th>宛名</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.post_code %></td>
+            <td><%= address.address %></td>
+            <td><%= address.name %></td>
+            <td>
+              <%= link_to "編集する", edit_public_address_path(address), class:"btn btn-success" %>
+              <%= link_to "削除する", apublic_ddress_path(address), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+</div>
