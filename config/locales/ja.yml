@@ -4,13 +4,30 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
+ja:
+  enums:
+    order:
+      status:
+        wait_payment: '入金待ち'
+        confirm_payment: '入金確認'
+        making: '製作中'
+        preparing_ship: '発送準備中'
+        finish_prepare: '発送済み'
+ja:
+  enums:
+    order_detail:
+      production_status:
+        impossible_production: '着手不可'
+        waiting_production: '製作待ち'
+        producing: '製作中'
+        finish: '製作完了'
+    activerecord:
+      errors:
+        messages:
+          record_invalid: 'バリデーションに失敗しました: %{errors}'
+          restrict_dependent_destroy:
+            has_one: "%{record}が存在しているので削除できません"
+            has_many: "%{record}が存在しているので削除できません"
   date:
     abbr_day_names:
     - 日
@@ -21,7 +38,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -47,7 +64,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
