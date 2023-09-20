@@ -86,11 +86,17 @@ ActiveRecord::Schema.define(version: 2023_09_19_035828) do
   end
 
   create_table "genres", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.text "introduction"
+    t.integer "price"
+    t.boolean "is_sale", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
