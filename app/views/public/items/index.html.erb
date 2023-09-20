@@ -1,2 +1,31 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div class='container p-5 px-0'>
+  <div class='row'>
+    <div class="col-md-3">
+      <%= render 'layouts/genre_search', genres: @genres %>
+    </div>
+    <div class='col-md-9 mb-5'>
+      <div class="row mb-5 align-items-center">
+        <h2 class="font-weight-bold">&nbsp;商品一覧&nbsp;</h2><span>(全<%= @items.count %>件)</span>
+      </div>
+
+      <div class="row">
+        <% @items.each do |item| %>
+        <div class="col-md-3 p-3">
+          <div class="text-center d-flex align-items-center mb-2", style="height: 120px">
+            <%= link_to public_item_path(item) do %>
+              <%= image_tag item.get_item_image, :style => "max-width:100%; max-height:100%" %>
+            <% end %>
+          </div>
+          <div class="pt-3">
+            <%= link_to item.name, public_item_path(item), :style => "color:black" %><br>
+            <span>￥</span><%= item.price.to_s(:delimited) %><br>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div class="row justify-content-center">
+        <%= paginate @items %>
+      </div>
+    </div>
+  </div>
+</div>

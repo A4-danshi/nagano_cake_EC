@@ -8,12 +8,12 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    get "search/genre/:id" => "items#search_genre" ,as: "search_genre"
     root to: "homes#top"
   end
 
   namespace :public do
     resources :items, only: [:index, :show]
+    get "search/genre/:id" => "items#search_genre" ,as: "search_genre"
     resources :customers, only: [:confirm, :withdrawal]
     get "customers/mypage" => "customers#show", as: 'customer'
     get "customers/infomation/edit" => "customers#edit", as: 'customer_edit'

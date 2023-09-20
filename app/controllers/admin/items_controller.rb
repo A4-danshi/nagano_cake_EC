@@ -35,11 +35,6 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
-  def search_genre
-    @genre = Genre.find(params[:id])
-    @items = @genre.items.page(params[:page])
-  end
-
   private
    def item_params
      params.require(:item).permit(:name, :introduction, :price, :is_sale, :item_image, :genre_id)
