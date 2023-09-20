@@ -62,7 +62,7 @@ item2.item_image.attach(io: File.open(Rails.root.join('app/assets/images/mabo_to
 item2.save!
 
 item3 = Item.new(
-  name: "焼きプリン",
+  name: "新鮮卵のこんがり焼きプリン",
   introduction: "焼き菓子なのかプリンなのか、もはやジャンルが不明！しかも市販品！！",
   genre_id: 3,
   price: 150,
