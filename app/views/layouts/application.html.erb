@@ -63,6 +63,19 @@
         <% end %>
       </div>
       </nav>
+      <div class="row">
+      <div class="text-center text-white col-8 pb-3">
+        <% if customer_signed_in? %>
+          ようこそ、<%= current_customer.last_name %>さん！
+        <% end %>
+      </div>
+        <div class="form-group row justify-content-center">
+          <%= form_with url:public_search_items_path, method: :get, local: :true do |f| %>
+            <%= f.text_field :word, placeholder: "商品名を入力" %>
+            <%= f.submit "検索" %>
+          <% end %>
+        </div>
+      </div>
     </header>
 
     <main>

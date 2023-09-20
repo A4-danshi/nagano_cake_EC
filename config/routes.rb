@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :items, only: [:index, :show]
+    get "search/items" => "items#search_item" ,as: "search_items"
     get "search/genre/:id" => "items#search_genre" ,as: "search_genre"
     resources :customers, only: [:confirm, :withdrawal]
     get "customers/mypage" => "customers#show", as: 'customer'
