@@ -9,7 +9,6 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.postage = 800
     @order.payment_method = params[:order][:payment_method]
-
     if params[:order][:select_address] == "0"
       @order.post_code = current_customer.post_code
       @order.address = current_customer.address
@@ -26,11 +25,11 @@ class Public::OrdersController < ApplicationController
     else
       flash[:notice] = "宛先を選択してください。"
     end
-
   end
 
   def create
-    @order = Order.new(order_params)
+    
+    
 
   end
 
