@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col">
       <h4 class="my-5">配送先編集</h4>
-       <%= form_with model: @address, url: edit_public_address_path do |f| %>
+       <%= form_with model: @address, url: public_address_path(@address) do |f| %>
         <div class="mb-3 row">
           <label class="col-3">郵便番号(ハイフンなし)</label>
           <div class="col-3 p-0">
-            <%= f.text_field :postal_code, class:"form-control",  autofocus: true, autocomplete: "postal_code" %>
+            <%= f.text_field :post_code, class:"form-control",  autofocus: true, autocomplete: "postal_code" %>
           </div>
         </div>
         <div class="mb-3 row">
