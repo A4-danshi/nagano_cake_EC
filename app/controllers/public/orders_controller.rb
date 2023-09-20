@@ -5,7 +5,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @cart_items = current_customer.cart_items
+    @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
     @order.postage = 800
     @order.payment_method = params[:order][:payment_method]
@@ -30,9 +30,7 @@ class Public::OrdersController < ApplicationController
   def create
     @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
-    # @order.customer = @customer
     @order.save
-        # @order.update(status: "waiting")        # ステータスを「入金待ち」に更新
     @cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
       @order_detail.purchase_price = cart_item.item.with_tax_price
@@ -41,19 +39,20 @@ class Public::OrdersController < ApplicationController
       @order_detail.item_id = cart_item.item.id
       @order_detail.save
     end
-    current_customer.cart_items.destroy_all # カート内の商品を削除
-    redirect_to public_order_complete
+    current_customer.cart_items.destroy_all
+    redirect_to public_order_complete_path
   end
 
   def complete
   end
 
   def index
-    @oders = current_customer.orders
+    @oders = current_customer.orders.all.order(id: 'DESC')
   end
 
   def show
-    @order = Order.find(params[:id])
+    # @order = Order.find(params[:id])
+    # @order = Order.where(customer_id: current_customer_id)
   end
 
   private

@@ -1,28 +1,30 @@
 <div class="container">
   <div class="row">
-      <h1 class="mt-3 mb-5">注文履歴一覧</h1>
-      <div class="col-12 mt-5">
+    <div class="col-12 mt-5">
+      <h1>注文履歴一覧</h1>
+    </div>
+      <%= link_to "マイページに戻る", public_customer_path, class: "btn btn-secondary ml-auto" %>
+      <div class="col-12 mt-5 mb-5">
         <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th style="width: 15%">注文日</th>
             <th style="width: 35%">配送先</th>
             <th style="width: 15%">注文商品</th>
-            <th style="width: 10%">支払金額</th>.to_s(:delimited)
+            <th style="width: 10%">支払金額</th>
             <th style="width: 10%">ステータス</th>
             <th style="width: 15%">注文詳細</th>
           </tr>
         </thead>
-         <% @orders.each do |order| %>
+        <% @orders.each do |order| %>
         <tbody>
           <tr>
             <td><%= order.created_at.strftime("%Y年%m月%d日") %></td>
-            <td><%= order.address.address_display %><br>
-                <%= order.name %></td>
+            <td><%= order.address.address_display %></td>
             <% order.order_details.each do |order_item| %>
             <td><%= order_item.item.name %><br></td>
             <% end %>
-            <td><%= a %></td>
+            <td><%= order.total_price.to_s(:delimited) %></td>
             <td><%= order.status_i18n %></td>
             <td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
           </tr>

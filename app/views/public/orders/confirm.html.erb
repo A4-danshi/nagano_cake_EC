@@ -32,22 +32,22 @@
           <thead class="thead-light">
           <tr>
             <th>送料</th>
-              <td><%= @order.postage %>円</td>
+              <td><%= @order.postage.to_s(:delimited) %>円</td>
             </tr>
           <tr>
             <th>商品合計</th>
-              <td><%= @order.total_payment %>円</td>
+               <td><%= @order.total_payment.to_s(:delimited) %>円</td>
           </tr>
           <tr>
             <th>請求金額</th>
-              <td><%= @order. %>円</td>
+              <td><%= @order.total_price.to_s(:delimited) %>円</td>
            </tr>
         </tbody>
       </table>
     </div>
     <div class="col-8">
       <strong>支払方法</strong>
-      <span class="ml-5"><%= @order.payment_method %></span>
+      <span class="ml-5"><%= @order.payment_method_i18n %></span>
     </div>
     <div class="col-8 mt-3">
       <strong>お届け先</strong>

@@ -3,6 +3,7 @@
     <div class="col-12 mt-5">
       <h1>注文履歴詳細</h1>
     </div>
+    <%= link_to "一覧に戻る", public_cart_items_path, class: "btn btn-secondary ml-auto" %>
     <div class="col-6 mt-5">
       <table class="table table-bordered">
         <h4 class="mb-3">注文情報</h4>
@@ -10,20 +11,19 @@
           <thead class="thead-light" %>
           <tr>
             <th style="width: 30%">注文日</th>
-              <td style="width: 70%"><%= order.created_at.strftime("%Y年%m月%d日") %></td>
+              <td style="width: 70%"><%= @order.created_at.strftime("%Y年%m月%d日") %></td>
             </tr>
           <tr>
             <th>配送先</th>
-              <td><%= order.address.address_display %><br>
-                  <%= order.name %></td>
+              <td><%= @order.address.address_display %></td>
           </tr>
           <tr>
             <th>支払方法</th>
-              <td><%= @order.payment_method %></td>
+              <td><%= @order.payment_method_i18n %></td>
            </tr>
            <tr>
             <th>ステータス</th>
-              <td><%= order.status_i18n %></td>
+              <td><%= @order.status_i18n %></td>
            </tr>
         </tbody>
       </table>
@@ -35,15 +35,15 @@
           <thead class="thead-light">
           <tr>
             <th style="width: 50%">商品合計</th>
-              <td style="width: 50%">円</td>
+              <td style="width: 50%"><%= @order.total_paymen.to_s(:delimited) %>円</td>
             </tr>
           <tr>
             <th>配送料</th>
-              <td><%= @order.postage %></td>
+              <td><%= @order.postage.to_s(:delimited) %>円</td>
           </tr>
           <tr>
             <th>ご請求金額</th>
-              <td><</td>
+              <td><%= @order.total_price.to_s(:delimited) %>円</td>
            </tr>
         </tbody>
       </table>
