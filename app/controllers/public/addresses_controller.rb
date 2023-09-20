@@ -14,7 +14,7 @@ class Public::AddressesController < ApplicationController
     @address.customer_id = current_customer.id
     if @address.save
       flash[:notice] = "配送先を追加しました"
-      redirect_to request.referer
+      redirect_to public_addresses_path
     else
       @address = current_customer.addresses.all
       render :index
@@ -26,7 +26,7 @@ class Public::AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.update(address_params)
       flash[:notice] = "配送先を変更しました"
-      redirect_to addresses_path
+      redirect_to public_addresses_path
     else
       render :edit
     end
