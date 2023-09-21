@@ -58,13 +58,12 @@
 
     <div class="col-6 mx-auto mt-3 mb-3">
       <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+      <%= f.hidden_field :customer_id %>
       <%= f.hidden_field :payment_method, value: @order.payment_method %>
       <%= f.hidden_field :post_code, value: @order.post_code %>
       <%= f.hidden_field :address, value: @order.address %>
       <%= f.hidden_field :name, value: @order.name %>
       <%= f.hidden_field :total_payment, value: @order.total_payment %>
-      <%= f.hidden_field :status %>
-      <%= f.hidden_field :customer_id %>
       <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
       <% end %>
     </div>
