@@ -17,15 +17,14 @@
         <td><%= cart_item.item.name %></td>
         <td><%= cart_item.item.with_tax_price %></td>
         <td>
-          <%= form_with model: cart_item, class: "d-inline-block" do |f| %>
+          <%= form_with model: cart_item,url: public_cart_item_path(cart_item), class: "d-inline-block" do |f| %>
             <%= f.select :amount, 1..10, prompt: "個数選択", class: "form-control d-inline-block w-auto"%>
             <%= f.submit '変更' , class: "btn btn-primary ml-2"%>
           <% end %>
         </td>
         <td><%= cart_item.subtotal %></td>
-        <td><%= link_to '削除する', cart_item_path(cart_item), method: :delete,class: "btn btn-danger" %></td>
+        <td><%= link_to '削除する', public_cart_item_path(cart_item), method: :delete,class: "btn btn-danger" %></td>
       </tr>
-      <% @total += cart_item.subtotal %>
     <% end %>
   </tbody>
 </table>

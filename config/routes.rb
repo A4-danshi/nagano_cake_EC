@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :items, only: [:index, :show]
+    get "search/genre/:id" => "items#search_genre" ,as: "search_genre"
     resources :customers, only: [:confirm, :withdrawal]
     get "customers/mypage" => "customers#show", as: 'customer'
     get "customers/infomation/edit" => "customers#edit", as: 'customer_edit'
@@ -23,8 +24,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm", as: 'order_confirm'
     get "orders/complete" => "orders#complete", as: 'order_complete'
-    resources :cart_items, only: [:index, :update, :destroy, :create]
     delete "cart_items/destroy_all" => "cart_items#destroy_all", as: 'cart_items_destroy_all'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
   end
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
