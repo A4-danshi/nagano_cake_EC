@@ -18,7 +18,7 @@
             <%= form_with model:@cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
               <div class="form-group form-inline mt-3">
                 <div class="mr-5">
-                  <%= f.select :amount, 1..10, { prompt: '個数選択' } %>
+                  <%= f.select :amount, 1..10, { prompt: '個数選択' },required: "required" %>
                 </div>
                 <%= f.hidden_field :item_id, :value => @item.id %>
                 <%= f.submit "カートに入れる", class: "btn btn-success" %>
