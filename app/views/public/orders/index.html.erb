@@ -9,10 +9,10 @@
         <thead class="thead-light">
           <tr>
             <th style="width: 15%">注文日</th>
-            <th style="width: 35%">配送先</th>
+            <th style="width: 30%">配送先</th>
             <th style="width: 15%">注文商品</th>
             <th style="width: 10%">支払金額</th>
-            <th style="width: 10%">ステータス</th>
+            <th style="width: 15%">ステータス</th>
             <th style="width: 15%">注文詳細</th>
           </tr>
         </thead>
@@ -20,12 +20,18 @@
         <tbody>
           <tr>
             <td><%= order.created_at.strftime("%Y年%m月%d日") %></td>
-            <td><%= order.address.address_display %></td>
-            <% order.order_details.each do |order_item| %>
-            <td><%= order_item.item.name %><br></td>
-            <% end %>
-            <td><%= order.total_price.to_s(:delimited) %></td>
-            <td><%= order.status_i18n %></td>
+            <td>〒<%= order.post_code %><br>
+                  <%= order.address %><br>
+                  <%= order.name %>
+            </td>
+
+            <td>
+              <ul class="list-unstyled">
+              <% order.order_details.each do |order_item| %>
+                <li><%= order_item.item.name %></li>
+              <% end %>
+            <td><%= order.total_payment.to_s(:delimited) %></td>
+            <td><%= order.status %></td>
             <td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
           </tr>
         </tbody>

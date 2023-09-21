@@ -28,16 +28,16 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @cart_items = current_customer.cart_items.all
-    @order = Order.new(order_params)
+    cart_items = current_customer.cart_items.all
+    @order = current_customer.orders.new(order_params)
     if @order.save
-      @cart_items.each do |cart_item|
-        @order_detail = OrderDetail.new
-        @order_detail.purchase_price = cart_item.item.with_tax_price
-        @order_detail.amount = cart_item.amount
-        @order_detail.order_id = order.id
-        @order_detail.item_id = cart_item.item.id
-        @order_detail.save
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item.id
+        order_detail.order_id = @order.id
+        order_detail.amount = cart_item.amount
+        order_detail.purchase_price = cart_item.item.with_tax_price
+        order_detail.save
       end
       current_customer.cart_items.destroy_all
       redirect_to public_order_complete_path
@@ -51,12 +51,13 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @oders = current_customer.orders.all.order(id: 'DESC')
+    @orders = current_customer.orders.order(id: 'DESC')
+
   end
 
   def show
     @order = Order.find(params[:id])
-    # @order = Order.where(customer_id: current_customer_id)
+    # @order = Order.where(customer_id: current_customer.id)
   end
 
   private
