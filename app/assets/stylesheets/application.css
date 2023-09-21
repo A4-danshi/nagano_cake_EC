@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.top {
+  position: relative;
+}
+
+.top-image {
+  width: 100%;
+}
+
+.top-text {
+  padding: 5px;
+  background:rgba(192,192,192,0.6);
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(255,255,240);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}

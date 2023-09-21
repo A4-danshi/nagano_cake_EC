@@ -1,0 +1,41 @@
+<div class='container p-5 px-0'>
+  <div class='row'>
+    <div class="col-md-2">
+      <%= render 'layouts/genre_search', genres: @genres %>
+    </div>
+    <div class='col-md-9 offset-1'>
+      <div class="top">
+        <div class="top-image text-center">
+          <%= image_tag 'top.jpg', :style => "max-width:100%" %>
+        </div>
+        <p  class="top-text">
+          ようこそ、ながのCAKEへ<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </p>
+      </div>
+      <div class="row my-5 align-items-center">
+        <h2 class="font-weight-bold">&nbsp;新着商品&nbsp;</h2>
+      </div>
+      <div class="row">
+        <% @items.limit(4).each do |item| %>
+          <div class="col-md-3 p-3">
+            <div class="text-center d-flex align-items-center mb-2", style="height: 120px">
+              <%= link_to public_item_path(item) do %>
+                <%= image_tag item.get_item_image, :style => "max-width:100%; max-height:100%" %>
+              <% end %>
+            </div>
+            <div class="pt-3">
+              <%= link_to item.name, public_item_path(item), :style => "color:black" %><br>
+              <span>￥</span><%= item.price.to_s(:delimited) %><br>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="text-right">
+        <%= link_to "全ての商品を見る>", public_items_path %>
+      </div>
+    </div>
+  </div>
+</div>
