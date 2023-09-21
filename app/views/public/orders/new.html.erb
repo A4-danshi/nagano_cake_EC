@@ -21,8 +21,8 @@
         <div class="form-group ml-5">
           <%= f.radio_button :select_address, "0", checked: true %>
           <%= f.label :select_address, "ご自身の住所" %>
-          <p>〒<%= current_customer.post_code %><%= current_customer.address %></p>
-          <p><%= current_customer.last_name %><%= current_customer.first_name %></p>
+          <p class="ml-2">&emsp;〒<%= current_customer.post_code %>&emsp;<%= current_customer.address %></p>
+          <p class="ml-4">&emsp;<%= current_customer.last_name %>&nbsp;&nbsp;<%= current_customer.first_name %></p>
         </div>
         <div class="form_group ml-5">
           <%= f.radio_button :select_address, "1" %>
