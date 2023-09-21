@@ -25,11 +25,9 @@
                   <%= order.name %>
             </td>
 
-            <td>
-              <ul class="list-unstyled">
-              <% order.order_details.each do |order_item| %>
-                <li><%= order_item.item.name %></li>
-              <% end %>
+            <td><% order.order_details.each do |order_detail| %>
+                  <%= order_detail.item.name %>
+                <% end %></td>
             <td><%= order.total_payment.to_s(:delimited) %></td>
             <td><%= order.status %></td>
             <td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
