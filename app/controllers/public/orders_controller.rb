@@ -25,7 +25,7 @@ class Public::OrdersController < ApplicationController
       end
     elsif params[:order][:select_address] == "2"
       if params[:order][:post_code] == "" || params[:order][:address] == "" || params[:order][:name] == ""
-        flash.now[:notice] = "お届け先を正しくを入力してください。"
+        flash.now[:notice] = "お届け先を正しく入力してください。"
         render :new
       else
         @order.post_code = params[:order][:post_code]
