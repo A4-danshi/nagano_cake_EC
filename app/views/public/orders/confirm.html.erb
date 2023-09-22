@@ -20,9 +20,9 @@
           <tr>
             <td class="align-middle"><%= image_tag cart_item.item.item_image, :size => '50x50' %>&emsp;
                 <strong><%= cart_item.item.name %></strong></td>
-            <td class="align-middle"><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+            <td class="align-middle"><%= cart_item.item.with_tax_price.to_s(:delimited) %>&nbsp;円</td>
             <td class="align-middle"><%= cart_item.amount %></td>
-            <td class="align-middle"><%= cart_item.subtotal.to_s(:delimited) %></td>
+            <td class="align-middle"><%= cart_item.subtotal.to_s(:delimited) %>&nbsp;円</td>
           </tr>
         </tbody>
         <% end %>
@@ -34,16 +34,16 @@
           <thead class="thead-light">
           <tr>
             <th>送料</th>
-              <td><%= @order.postage.to_s(:delimited) %></td>
+              <td><%= @order.postage.to_s(:delimited) %>&nbsp;円</td>
             </tr>
           <tr>
             <th>商品合計</th>
-               <td><%= total.to_s(:delimited) %></td>
+               <td><%= total.to_s(:delimited) %>&nbsp;円</td>
           </tr>
           <tr>
             <th>請求金額</th>
 
-              <td><%= (total + @order.postage).to_s(:delimited) %></td>
+              <td><%= (total + @order.postage).to_s(:delimited) %>&nbsp;円</td>
            </tr>
         </tbody>
       </table>

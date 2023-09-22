@@ -28,7 +28,7 @@
            </tr>
            <tr>
             <th>ステータス</th>
-              <td><%= @order.status %></td>
+              <td><%= @order.status_i18n %></td>
            </tr>
         </tbody>
       </table>
@@ -40,15 +40,15 @@
           <thead class="thead-light">
           <tr>
             <th style="width: 50%">商品合計</th>
-              <td style="width: 50%"><%= (@order.total_payment - @order.postage).to_s(:delimited) %>円</td>
+              <td style="width: 50%"><%= (@order.total_payment - @order.postage).to_s(:delimited) %>&nbsp;円</td>
             </tr>
           <tr>
             <th>配送料</th>
-              <td><%= @order.postage.to_s(:delimited) %>円</td>
+              <td><%= @order.postage.to_s(:delimited) %>&nbsp;円</td>
           </tr>
           <tr>
             <th>ご請求金額</th>
-              <td><%= @order.total_payment.to_s(:delimited) %>円</td>
+              <td><%= @order.total_payment.to_s(:delimited) %>&nbsp;円</td>
            </tr>
         </tbody>
       </table>
@@ -69,9 +69,9 @@
           <tr>
             <td><%= image_tag order_detail.item.item_image, :size => '50x50' %>&emsp;
                 <%= order_detail.item.name %></td>
-            <td class="align-middle"><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
+            <td class="align-middle"><%= order_detail.item.with_tax_price.to_s(:delimited) %>&nbsp;円</td>
             <td class="align-middle"><%= order_detail.amount %></td>
-            <td class="align-middle"><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
+            <td class="align-middle"><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %>&nbsp;円</td>
           </tr>
         </tbody>
         <% end %>
