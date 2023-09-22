@@ -5,7 +5,6 @@
     </div>
     <div class="col-6 mt-5">
       <table class="table table-bordered">
-        <% @cart_items.each do |cart_item| %>
         <thead class="thead-light">
           <tr>
             <th>商品名</th>
@@ -14,13 +13,16 @@
             <th>小計</th>
           </tr>
         </thead>
+        <% total = 0 %>
+        <% @cart_items.each do |cart_item| %>
+        <% total += cart_item.subtotal %>
         <tbody>
           <tr>
-            <td><%= image_tag item_image.item.get_item_image %>
+            <td>
                 <%= cart_item.item.name %></td>
-            <td><%= cart.item.item.with_tax_price %></td>
+            <td><%= cart_item.item.with_tax_price %></td>
             <td><%= cart_item.amount %></td>
-            <td><%= cart_item.subtotal %></td>
+            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
           </tr>
         </tbody>
         <% end %>
@@ -29,24 +31,26 @@
     <div class="col-4 mt-5">
       <table class="table table-bordered">
         <tbody>
+          <thead class="thead-light">
           <tr>
-            <th class="table-secondary">送料</th>
-              <td><%= @order.postage %>円</td>
+            <th>送料</th>
+              <td>¥<%= @order.postage.to_s(:delimited) %></td>
             </tr>
           <tr>
-            <th class="table-secondary">商品合計</th>
-              <td><%= total_payment %>円</td>
+            <th>商品合計</th>
+               <td>¥<%= total.to_s(:delimited) %></td>
           </tr>
           <tr>
-            <th class="table-secondary">請求金額</th>
-              <td><%= total_payment + @order.postage %>円</td>
+            <th>請求金額</th>
+
+              <td>¥<%= (total + @order.postage).to_s(:delimited) %></td>
            </tr>
         </tbody>
       </table>
     </div>
     <div class="col-8">
       <strong>支払方法</strong>
-      <span class="ml-5"><%= @order.payment_method %></span>
+      <span class="ml-5"><%= @order.payment_method_i18n %></span>
     </div>
     <div class="col-8 mt-3">
       <strong>お届け先</strong>
@@ -57,14 +61,14 @@
 
     <div class="col-6 mx-auto mt-3 mb-3">
       <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
-      <%= f.hidden_field :payment_method, value: @order.payment_method %>
-      <%= f.hidden_field :post_code, value: @order.post_code %>
-      <%= f.hidden_field :address, value: @order.address %>
-      <%= f.hidden_field :name, value: @order.name %>
-      <%= f.hidden_field :customer_id %>
+      <%= f.hidden_field :customer_id, :value => @current_customer_id %>
+      <%= f.hidden_field :payment_method %>
+      <%= f.hidden_field :post_code %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :total_payment, :value => (total + @order.postage).to_s %>
       <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
       <% end %>
     </div>
   </div>
 </div>
-

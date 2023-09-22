@@ -5,7 +5,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @cart_items = current_customer.cart_items
+    @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
     @order.postage = 800
     @order.payment_method = params[:order][:payment_method]
@@ -28,24 +28,42 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    
-    
-
+    cart_items = current_customer.cart_items.all
+    @order = current_customer.orders.new(order_params)
+    if @order.save
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item.id
+        order_detail.order_id = @order.id
+        order_detail.amount = cart_item.amount
+        order_detail.purchase_price = cart_item.item.with_tax_price
+        order_detail.save
+      end
+      current_customer.cart_items.destroy_all
+      redirect_to public_order_complete_path
+    else
+      flash[:notice] = "注文が確定できませんでした。もう一度やり直してください。"
+      redirect_to public_cart_items_path
+    end
   end
 
   def complete
   end
 
   def index
+    @orders = current_customer.orders.order(id: 'DESC')
+
   end
 
   def show
+    @order = Order.find(params[:id])
+    # @order = Order.where(customer_id: current_customer.id)
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :post_code, :address, :name, :total_payment, :status)
+    params.require(:order).permit(:payment_method, :post_code, :address, :name, :total_payment, :status, :customer_id)
   end
 
 end

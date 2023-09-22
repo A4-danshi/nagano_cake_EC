@@ -15,4 +15,13 @@ class Public::ItemsController < ApplicationController
     @genre = Genre.find(params[:id])
     @items = @genre.items.page(params[:page])
   end
+
+  def search_item
+    @genres = Genre.all
+    if params[:word] == ""
+      redirect_to public_items_path
+    else
+      @items = Item.looks(params[:word]).page(params[:page])
+    end
+  end
 end

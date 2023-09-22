@@ -7,7 +7,7 @@
         <strong>支払方法</strong>
         <div class="form_group">
           <div class="form_check ml-5">
-            <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+            <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
             <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
           </div>
           <div class="form_check ml-5">
