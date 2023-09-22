@@ -59,7 +59,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     # @order = Order.where(customer_id: current_customer.id)
     @order.postage = 800
-    
+
   end
 
   private

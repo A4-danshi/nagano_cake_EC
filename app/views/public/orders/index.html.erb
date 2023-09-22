@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 mt-5">
-      <h1>注文履歴一覧</h1>
+    <div class="col-12 mt-5 ml-3">
+      <h2 style="margin-top: 30px; background-color: rgba(128, 128, 128, 0.2); padding-left: 20px; padding-right: 20px; display: inline-block;">注文履歴一覧</h2>
     </div>
       <%= link_to "マイページに戻る", public_customer_path, class: "btn btn-secondary ml-auto" %>
       <div class="col-12 mt-5 mb-5">
@@ -28,7 +28,7 @@
                 <% end %></td>
             <td class="align-middle text-center"><%= order.total_payment.to_s(:delimited) %>円</td>
             <td class="align-middle text-center"><%= order.status %></td>
-            <td class="align-middle"><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
+            <td class="align-middle text-center"><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
           </tr>
         </tbody>
         <% end %>

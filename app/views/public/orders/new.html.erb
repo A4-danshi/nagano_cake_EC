@@ -1,53 +1,63 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 mt-5 mx-auto">
-      <h1>注文情報入力</h1>
+    <div class="col-8 mt-5 mx-auto">
+      <h1 style="margin-top: 30px; background-color: rgba(128, 128, 128, 0.2); padding-left: 20px; padding-right: 20px; display: inline-block;">注文情報入力</h1>
+    </div>
+    <div class="col-12">
       <%= form_with model: @order, url: public_order_confirm_path, method: :post do |f| %>
-      <div class="payment_method mt-5">
-        <strong>支払方法</strong>
-        <div class="form_group">
-          <div class="form_check ml-5">
-            <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
+      <div class="mt-5">
+        <h3><b>支払方法</b></h3>
+        <div class="mt-2 ml-3">
+          <h4 class="mt-3 ml-5">
+            <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>&nbsp;
             <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
-          </div>
-          <div class="form_check ml-5">
-            <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-            <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
-          </div>
+          </h4>
+          <h4 class="ml-5">
+            <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>&nbsp;
+            <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
+          </h4>
         </div>
       </div>
-      <div class="address mt-3">
-      <strong>お届け先</strong>
-        <div class="form-group ml-5">
-          <%= f.radio_button :select_address, "0", checked: true %>
-          <%= f.label :select_address, "ご自身の住所" %>
-          <p class="ml-2">&emsp;〒<%= current_customer.post_code %>&emsp;<%= current_customer.address %></p>
-          <p class="ml-4">&emsp;<%= current_customer.last_name %>&nbsp;&nbsp;<%= current_customer.first_name %></p>
+      <div class="mt-4">
+        <h3><b>お届け先</b></h3>
+        <div class="ml-3">
+          <h4 class="mt-3 ml-5">
+            <%= f.radio_button :select_address, "0", checked: true %>
+            <%= f.label :select_address, "ご自身の住所" %>
+          </h4>
+          <div class="ml-5 pl-5">
+            <h5 class="ml-4">〒&nbsp;<%= current_customer.post_code %>&emsp;<%= current_customer.address %></h5>
+            <h5 class="ml-5"><%= current_customer.last_name %>&nbsp;&nbsp;<%= current_customer.first_name %></h5>
+          </div>
         </div>
-        <div class="form_group ml-5">
-          <%= f.radio_button :select_address, "1" %>
-          <%= f.label :select_address, "登録済み住所から選択" %>
-          <p class="form_check ml-3"><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %></p>
+        <div class="mt-3 ml-3">
+          <h4 class="ml-5">
+            <%= f.radio_button :select_address, "1" %>
+            <%= f.label :select_address, "登録済み住所から選択" %>
+            <p class="ml-5 pl-5"><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %></p>
+          </h4>
         </div>
-        <div class="form_group ml-5">
-          <%= f.radio_button :select_address, "2" %>
-          <%= f.label :select_address, "新しいお届け先" %>
-          <div class="row">
-            <div class="col-3 ml-3">
+        <div class="mt-3 ml-3">
+          <h4 class="ml-5">
+            <%= f.radio_button :select_address, "2" %>
+            <%= f.label :select_address, "新しいお届け先" %>
+          </h4>
+          <div class="row ml-5">
+            <div class=" ml-5 pl-5">
               <p>郵便番号（ハイフンなし）</p>
               <p>住所</p>
               <p>宛名</p>
             </div>
-            <div class="col-6">
-              <p><%= f.text_field :post_code, placeholder: "0000000", size: "10" %></p>
-              <p><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", size: "40x20" %></p>
-              <p><%= f.text_field :name, placeholder: "令和道子", size: "40x20" %></p>
+            <div class="col-7">
+              <p><%= f.text_field :post_code, placeholder: "0000000", size: "20" %></p>
+              <p><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", size: "40" %></p>
+              <p><%= f.text_field :name, placeholder: "令和道子", size: "20" %></p>
             </div>
           </div>
         </div>
       </div>
-      <div class="actions col-6 mx-auto">
-        <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-3 mb-5" %>
+      <div class="col-4  text-center mx-auto mb-5">
+        <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-5", style: "width: 60%; font-size: 20px;" %>
       </div>
       <% end %>
     </div>
