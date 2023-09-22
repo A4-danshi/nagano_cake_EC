@@ -1,42 +1,53 @@
-<h1>会員情報編集</h1>
-
-<%= form_with model: @customer, url: public_customer_update_path do |f| %>
-
-  <div class="field">
-      <%= f.label :氏名 %>
-      <%= f.text_field :last_name, autofocus: true %>
-      <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :フリガナ %>
-    <%= f.text_field :kana_last_name %>
-    <%= f.text_field :kana_first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :郵便番号（ハイフンなし） %>
-    <%= f.text_field :post_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :住所 %>
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :電話番号（ハイフンなし） %>
-    <%= f.text_field :phone_number %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "編集内容を保存", class: "btn btn-success" %>
-  </div>
-<% end %>
-
-<%= link_to "退会する", public_customer_confirm_path, class: "btn btn-danger" %>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mt-5 mb-5">
+      <h1 style="background-color: rgba(0, 0, 0, 0.075); padding-left: 20px; padding-right: 20px; display: inline-block;">会員情報編集</h1>
+    </div>
+    <div class="col-10 mx-auto">
+    <%= form_with model: @customer, url: public_customer_update_path do |f| %>
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td style="width: 30%">名前</td>
+          <td style="width: 35%"><%= f.text_field :last_name, placeholder: "令和",autofocus: true %></td>
+          <td style="width: 35%"><%= f.text_field :first_name, placeholder: "道子" %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%= f.text_field :kana_last_name, placeholder: "レイワ" %></td>
+          <td><%= f.text_field :kana_first_name, placeholder: "ミチコ" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :post_code, "郵便番号(ハイフンなし)" %></td>
+          <td><%= f.text_field :post_code, placeholder: "0000000" %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><%= f.label :address, "住所" %></td>
+          <td colspan="2"><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", style: "width: 100%" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :phone_number, "電話番号(ハイフンなし)" %></td>
+          <td><%= f.text_field :phone_number, placeholder: "0000000000" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :email, "メールアドレス" %></td>
+          <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="mx-auto mt-3 mb-2">
+              <%= f.submit "編集内容を保存", class: "btn btn-success" %>
+            </div>
+          </td>
+          <td>
+            <div class="ml-auto mt-3 mb-2">
+              <%= link_to "退会する", public_customer_confirm_path, class: "btn btn-danger" %>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% end %>
+    </div>
