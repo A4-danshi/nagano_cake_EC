@@ -14,16 +14,27 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
-       @address = Address.find(params[:order][:address_id])
-       @order.post_code = @address.post_code
-       @order.address = @address.address
-       @order.name = @address.name
+      if params[:order][:address_id].present?
+        @address = Address.find(params[:order][:address_id])
+        @order.post_code = @address.post_code
+        @order.address = @address.address
+        @order.name = @address.name
+      else
+        flash.now[:notice] = "住所を選択してください。"
+        render :new
+      end
     elsif params[:order][:select_address] == "2"
-      @order.post_code = params[:order][:post_code]
-      @order.address = params[:order][:address]
-      @order.name = params[:order][:name]
+      if params[:order][:post_code] == "" || params[:order][:address] == "" || params[:order][:name] == ""
+        flash.now[:notice] = "お届け先を正しく入力してください。"
+        render :new
+      else
+        @order.post_code = params[:order][:post_code]
+        @order.address = params[:order][:address]
+        @order.name = params[:order][:name]
+      end
     else
-      flash[:notice] = "宛先を選択してください。"
+      flash.now[:notice] = "宛先を選択してください。"
+      render :new
     end
   end
 
@@ -57,7 +68,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # @order = Order.where(customer_id: current_customer.id)
+    @order.postage = 800
   end
 
   private
