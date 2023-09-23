@@ -52,3 +52,22 @@ gem 'enum_help'
  $bundle install  
  $yarn add @babel/plugin-proposal-private-methods @babel/plugin-proposal-private-property-in-object  
  $rails s  
+
+### 【顧客(会員)ページのログイン方法(customers/sign_in)】
+
+ヘッダーのログインボタンを押してください。  
+
+顧客ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
+(新規登録も可能です)  
+
+メールアドレス：test1@test.com  
+パスワード：password
+
+### 【管理者ページのログイン方法(admin/sign_in)】
+
+URLの後ろに/admin/sign_inをつけてください。  
+
+管理者ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
+
+メールアドレス：admin@admin  
+パスワード：a4a4a4
