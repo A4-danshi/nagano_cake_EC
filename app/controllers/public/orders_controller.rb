@@ -41,6 +41,7 @@ class Public::OrdersController < ApplicationController
   def create
     cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
+    @order.postage = 800
     if @order.save
       cart_items.each do |cart_item|
         order_detail = OrderDetail.new
@@ -68,7 +69,6 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.postage = 800
   end
 
   private
