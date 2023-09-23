@@ -15,7 +15,7 @@ Admin.create!(
 
 # ＝＝＝＝＝＝＝＝＝＝＝初期Customerの追加＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
-25.times do |n|
+12.times do |n|
   Customer.create!(
     last_name: "令和",
     first_name: "#{n + 1}太郎",

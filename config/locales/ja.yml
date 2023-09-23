@@ -1,28 +1,28 @@
 ja:
- enums:
-  order:
-   payment_method:
-    credit_card: "クレジットカード"
-    transfer: "銀行振込"
-   status:
-    wait_payment: '入金待ち'
-    confirm_payment: '入金確認'
-    making: '製作中'
-    preparing_ship: '発送準備中'
-    finish_prepare: '発送済み'
-  order_detail:
-   production_status:
-    impossible_production: '着手不可'
-    waiting_production: '製作待ち'
-    producing: '製作中'
-    finish: '製作完了'
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
+  enums:
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"
+      status:
+        wait_payment: '入金待ち'
+        confirm_payment: '入金確認'
+        making: '製作中'
+        preparing_ship: '発送準備中'
+        finish_prepare: '発送済み'
+    order_detail:
+      production_status:
+        impossible_production: '着手不可'
+        waiting_production: '製作待ち'
+        producing: '製作中'
+        finish: '製作完了'
+    activerecord:
+      errors:
+        messages:
+          record_invalid: 'バリデーションに失敗しました: %{errors}'
+          restrict_dependent_destroy:
+            has_one: "%{record}が存在しているので削除できません"
+            has_many: "%{record}が存在しているので削除できません"
   date:
     abbr_day_names:
     - 日

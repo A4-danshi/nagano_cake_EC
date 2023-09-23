@@ -16,9 +16,15 @@
             <% @customers.each do |customer| %>
             <tr>
               <td><%= customer.id %></td>
-              <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer.id) %></td>
+              <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
               <td><%= customer.email %></td>
-              <td><%= customer.is_deleted %></td>
+              <td>
+                <% if customer.is_deleted == false %>
+                  有効
+                <% else %>
+                  退会
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>
