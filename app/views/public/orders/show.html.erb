@@ -1,12 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-5">
-      <h1>注文履歴詳細</h1>
+      <h2 style="margin-top: 30px; background-color: rgba(128, 128, 128, 0.2); padding-left: 20px; padding-right: 20px; display: inline-block;">注文履歴詳細</h2>
     </div>
-    <%= link_to "一覧に戻る", public_orders_path, class: "btn btn-secondary ml-auto" %>
-    <div class="col-6 mt-5">
+    <div class="col-12 d-flex justify-content-end">
+      <%= link_to "一覧に戻る", public_orders_path, class: "btn btn-secondary" %>
+    </div>
+
+    <div class="col-6 mt-3">
       <table class="table table-bordered">
-        <h4 class="mb-3">注文情報</h4>
+        <h4 class="mb-3"><b>注文情報</b></h4>
         <tbody>
         <thead class="thead-light" %>
           <tr>
@@ -14,10 +17,10 @@
               <td style="width: 70%"><%= @order.created_at.strftime("%Y年%m月%d日") %></td>
             </tr>
           <tr>
-            <th>配送先</th>
-              <td>〒<%= @order.post_code %><br>
-                  <%= @order.address %><br>
-                  <%= @order.name %></td>
+            <th class="align-middle">配送先</th>
+              <td>〒 <%= @order.post_code %><br>
+                  &emsp;<%= @order.address %><br>
+                  &emsp;<%= @order.name %></td>
           </tr>
           <tr>
             <th>支払方法</th>
@@ -25,34 +28,34 @@
            </tr>
            <tr>
             <th>ステータス</th>
-              <td><%= @order.status %></td>
+              <td><%= @order.status_i18n %></td>
            </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-5 mt-5">
+    <div class="col-5 mt-3">
       <table class="table table-bordered">
-        <h4 class="mb-3">請求情報</h4>
+        <h4 class="mb-3"><b>請求情報</b></h4>
         <tbody>
           <thead class="thead-light">
           <tr>
             <th style="width: 50%">商品合計</th>
-              <td style="width: 50%">円</td>
+              <td style="width: 50%"><%= (@order.total_payment - @order.postage).to_s(:delimited) %>&nbsp;円</td>
             </tr>
           <tr>
             <th>配送料</th>
-              <td><%= @order.postage %>円</td>
+              <td><%= @order.postage.to_s(:delimited) %>&nbsp;円</td>
           </tr>
           <tr>
             <th>ご請求金額</th>
-              <td>円</td>
+              <td><%= @order.total_payment.to_s(:delimited) %>&nbsp;円</td>
            </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-10 mt-5 mb-5">
+    <div class="col-10 mt-3 mb-5 pb-5">
       <table class="table table-bordered">
-        <h4 class="mb-3">注文内容</h4>
+        <h4 class="mb-3"><b>注文内容</b></h4>
         <thead class="thead-light">
           <tr>
             <th style="width: 50%">商品</th>
@@ -61,13 +64,14 @@
             <th style="width: 15%">小計</th>
           </tr>
         </thead>
-        <% @order_details.each do |order_detail| %>
+        <% @order.order_details.each do |order_detail| %>
         <tbody>
           <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.item.with_tax_price %></td>
-            <td><%= order_detail.amount %></td>
-            <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+            <td><%= image_tag order_detail.item.item_image, :size => '50x50' %>&emsp;
+                <%= order_detail.item.name %></td>
+            <td class="align-middle"><%= order_detail.item.with_tax_price.to_s(:delimited) %>&nbsp;円</td>
+            <td class="align-middle"><%= order_detail.amount %></td>
+            <td class="align-middle"><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %>&nbsp;円</td>
           </tr>
         </tbody>
         <% end %>
