@@ -1,7 +1,18 @@
-
 ja:
   activerecord:
+    models:
+      customer:
     attributes:
+      customer: 
+        last_name: 姓
+        first_name: 名
+        kana_last_name: セイ 
+        kana_first_name: メイ 
+        post_code: 郵便番号
+        address: 住所
+        phone_number: 電話番号
+        email: Eメール
+        password: パスワード
       user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
