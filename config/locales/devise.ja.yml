@@ -3,11 +3,11 @@ ja:
     models:
       customer:
     attributes:
-      customer: 
+      customer:
         last_name: 姓
         first_name: 名
-        kana_last_name: セイ 
-        kana_first_name: メイ 
+        kana_last_name: セイ
+        kana_first_name: メイ
         post_code: 郵便番号
         address: 住所
         phone_number: 電話番号
