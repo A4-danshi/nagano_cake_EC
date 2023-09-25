@@ -1,0 +1,52 @@
+<div class="container cake-font">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">配送先登録/一覧</h4>
+        <%= render 'layouts/errors', obj: @address %>
+        <%= form_with model: @address, url: public_addresses_path do |f| %>
+          <div class="mb-3 row">
+            <label class="col-3">郵便番号(ハイフンなし)</label>
+            <div class="col-3 p-0">
+              <%= f.text_field :post_code, class:"form-control", placeholder:"0000000", autofocus: true, autocomplete: "postal_code" %>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3">住所</label>
+            <div class="col-6 p-0">
+              <%= f.text_field :address, class:"form-control", placeholder:"東京都渋谷区代々木神園町0-0", autocomplete: "address" %>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3">宛名</label>
+            <div class="col-3 p-0">
+              <%= f.text_field :name, class:"form-control", placeholder:"令和道子", autocomplete: "name" %>
+            </div>
+            <div class="col-2 offset-3 p-0">
+              <%= f.submit '新規登録', class:"btn btn-success btn-block" %>
+            </div>
+          </div>
+        <% end %>
+        <table class="table table-bordered">
+          <thead class="bg-ligth">
+            <tr>
+              <th>郵便番号</th>
+              <th>住所</th>
+              <th>宛名</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @addresses.each do |address| %>
+            <tr>
+              <td><%= address.post_code %></td>
+              <td><%= address.address %></td>
+              <td><%= address.name %></td>
+              <td>
+                <%= link_to "編集する", edit_public_address_path(address), class:"btn btn-success" %>
+                <%= link_to "削除する", public_address_path(address), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+  </div>
+</div>

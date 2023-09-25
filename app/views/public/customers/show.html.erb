@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 mt-5 mb-5 ml-5">
+      <h2 style="background-color: rgba(0, 0, 0, 0.075); padding-left: 20px; padding-right: 20px; display: inline-block;">マイページ</h2>
+    </div>
+    <div class="col-10 d-flex">
+      <h4><b>登録情報</b></h4>
+      <p class="ml-5 pl-5"><%= link_to "編集する", public_customer_edit_path, class: "btn btn-success", style: "width: 150px" %></p>
+    </div>
+    <div class="col-10">
+    <table class="table table-bordered bordered-dark">
+      <tbody>
+        <tr>
+          <td style="width: 30%; background-color: rgba(0, 0, 0, 0.075);">氏名</td>
+          <td style="width: 70%"><%= @customer.last_name %>&nbsp;<%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 0, 0, 0.075)">カナ</td>
+          <td><%= @customer.kana_last_name %>&nbsp;<%= @customer.kana_first_name %></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 0, 0, 0.075)">郵便番号</td>
+          <td><%= @customer.post_code %></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 0, 0, 0.075)">住所</td>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 0, 0, 0.075)">電話番号</td>
+          <td><%= @customer.phone_number %></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(0, 0, 0, 0.075)">メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-10 mt-3 mb-5">
+      <table class="table table-borderless col-6">
+        <tbody>
+          <tr>
+            <td><h4><b>配送先</b></h4></td>
+            <td><%= link_to "一覧を見る", public_addresses_path, class: "btn btn-primary", style: "width: 100%" %></td>
+          </tr>
+          <tr>
+            <td><h4><b>注文履歴一覧</b></h4></td>
+            <td><%= link_to "一覧を見る", public_orders_path, class: "btn btn-primary", style: "width: 100%" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

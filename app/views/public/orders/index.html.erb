@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-5 ml-3">
+      <h2 style="margin-top: 30px; background-color: rgba(128, 128, 128, 0.2); padding-left: 20px; padding-right: 20px; display: inline-block;">注文履歴一覧</h2>
+    </div>
+      <%= link_to "マイページに戻る", public_customer_path, class: "btn btn-secondary ml-auto" %>
+      <div class="col-12 mt-5 mb-5">
+        <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 15%">注文日</th>
+            <th style="width: 25%">配送先</th>
+            <th style="width: 25%">注文商品</th>
+            <th style="width: 10%">支払金額</th>
+            <th style="width: 13%">ステータス</th>
+            <th style="width: 15%">注文詳細</th>
+          </tr>
+        </thead>
+        <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td class="align-middle text-center"><%= order.created_at.strftime("%Y年%m月%d日") %></td>
+            <td class="align-middle">〒 <%= order.post_code %><br>
+                                     &emsp; <%= order.address %><br>
+                                     &emsp; <%= order.name %></td>
+            <td class="align-middle"><% order.order_details.each do |order_detail| %>
+                  <%= order_detail.item.name %><br>
+                <% end %></td>
+            <td class="align-middle text-center"><%= order.total_payment.to_s(:delimited) %>&nbsp;円</td>
+            <td class="align-middle text-center"><%= order.status_i18n %></td>
+            <td class="align-middle text-center"><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

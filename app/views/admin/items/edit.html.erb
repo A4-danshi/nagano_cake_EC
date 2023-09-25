@@ -1,0 +1,68 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-10 offset-md-1 mb-5'>
+      <div class="row m-5 align-items-center">
+        <h2 class="bg-light">&nbsp;商品編集&nbsp;</h2>
+      </div>
+      <div class="col-md-8 mx-auto">
+        <%= form_with model:@item, url: admin_item_path, local:true do |f| %>
+          <%= render 'layouts/errors', obj: @item %>
+          <table class="table table-borderless">
+            <tbody>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :商品画像 %></td>
+                  <td><%= f.file_field :item_image, class: "form-control-image item_image", accept: 'image/*' %></td>
+                </tr>
+              </div>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :商品名 %></td>
+                  <td><%= f.text_field :name, placeholder: "商品名", class: 'form-control item_name' %></td>
+                </tr>
+              </div>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :商品説明 %></td>
+                  <td><%= f.text_area :introduction, placeholder: "ここに説明文を記述します", class: 'form-control item_introduction', rows: "10" %></td>
+                </tr>
+              </div>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :ジャンル %></td>
+                  <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), {prompt: "選択してください"}, class: 'form-control item_genre' %></td>
+                </tr>
+              </div>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :税抜き価格 %></td>
+                  <td><%= f.text_field :price, placeholder: "1000", class: 'item_price' %><span>円</span></td>
+                </tr>
+              </div>
+              <div class="form-group">
+                <tr>
+                  <td><%= f.label :販売ステータス %></td>
+                  <td>
+                    <div class="form_check form-check-inline">
+                      <%= f.radio_button :is_sale, true, class: "form-check-input item_is_sale" %>
+                      <%= f.label :is_sale_true, "販売中" %>
+                    </div>
+                    <div class="form_check form-check-inline">
+                      <%= f.radio_button :is_sale, false, class: "form-check-input item_is_sale" %>
+                      <%= f.label :is_sale_false, "販売停止中" %>
+                    </div>
+                  </td>
+                </tr>
+              </div>
+            </tbody>
+          </table>
+          <div class="form-group text-center">
+            <tr>
+              <td><%= f.submit "  変更を保存  ", class: 'btn btn-lg btn-success' %></td>
+            </tr>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

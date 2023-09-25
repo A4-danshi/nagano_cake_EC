@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-5">
+      <h2 style="margin-top: 30px; background-color: rgba(128, 128, 128, 0.2); padding-left: 20px; padding-right: 20px; display: inline-block;">注文情報確認画面</h2>
+    </div>
+    <div class="col-8 mt-5">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <% total = 0 %>
+        <% @cart_items.each do |cart_item| %>
+        <% total += cart_item.subtotal %>
+        <tbody>
+          <tr>
+            <td class="align-middle"><%= image_tag cart_item.item.item_image, :size => '50x50' %>&emsp;
+                <strong><%= cart_item.item.name %></strong></td>
+            <td class="align-middle"><%= cart_item.item.with_tax_price.to_s(:delimited) %>&nbsp;円</td>
+            <td class="align-middle"><%= cart_item.amount %></td>
+            <td class="align-middle"><%= cart_item.subtotal.to_s(:delimited) %>&nbsp;円</td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+    <div class="col-4 mt-5">
+      <table class="table table-bordered">
+        <tbody>
+          <thead class="thead-light">
+          <tr>
+            <th>送料</th>
+              <td><%= @order.postage.to_s(:delimited) %>&nbsp;円</td>
+            </tr>
+          <tr>
+            <th>商品合計</th>
+               <td><%= total.to_s(:delimited) %>&nbsp;円</td>
+          </tr>
+          <tr>
+            <th>請求金額</th>
+
+              <td><%= (total + @order.postage).to_s(:delimited) %>&nbsp;円</td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-8 mt-3">
+      <h5 class="d-inline-flex"><b>支払方法</b></h5>
+      <h5 class="d-inline-flex ml-5"><%= @order.payment_method_i18n %></h5>
+    </div>
+    <div class="col-8 mt-3 mb-5">
+      <h5 class="d-inline-flex"><b>お届け先</b></h5>
+        <h5 class="d-inline-flex ml-5">〒 <%= @order.post_code %>&emsp;
+                                          <%= @order.address %><br>
+                                          &emsp;<%= @order.name %></h5>
+    </div>
+
+    <div class="col-6 mx-auto mt-3">
+      <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+      <%= f.hidden_field :customer_id, :value => @current_customer_id %>
+      <%= f.hidden_field :payment_method %>
+      <%= f.hidden_field :post_code %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :total_payment, :value => (total + @order.postage).to_s %>
+    </div>
+  </div>
+  <div class="col-4 text-center mx-auto mb-5">
+      <%= f.submit "注文を確定する", class: "btn btn-success mt-3", style: "width: 60%; font-size: 20px;" %>
+      <% end %>
+  </div>
+</div>
