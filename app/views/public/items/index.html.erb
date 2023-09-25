@@ -18,7 +18,11 @@
           </div>
           <div class="pt-3 mb-2">
             <%= link_to item.name, public_item_path(item), :style => "color:black" %><br>
-            <span>￥</span><%= item.price.to_s(:delimited) %><br>
+            <% if item.is_sale == true %>
+              <span>￥</span><%= item.price.to_s(:delimited) %><br>
+            <% else %>
+              <span style="text-decoration:line-through">￥<%= item.price.to_s(:delimited) %></span><span style="font-weight:bold;color:red"> 品切れ</span><br>
+            <% end %>
           </div>
         </div>
         <% end %>
