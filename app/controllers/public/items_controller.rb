@@ -6,14 +6,14 @@ class Public::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.page(params[:page])
+    @items = Item.page(params[:page]).per(8)
     @genres = Genre.all
   end
 
   def search_genre
     @genres = Genre.all
     @genre = Genre.find(params[:id])
-    @items = @genre.items.page(params[:page])
+    @items = @genre.items.page(params[:page]).per(8)
   end
 
   def search_item
@@ -21,7 +21,7 @@ class Public::ItemsController < ApplicationController
     if params[:word] == ""
       redirect_to public_items_path
     else
-      @items = Item.looks(params[:word]).page(params[:page])
+      @items = Item.looks(params[:word]).page(params[:page]).per(8)
     end
   end
 end
