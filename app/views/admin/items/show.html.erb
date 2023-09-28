@@ -11,7 +11,7 @@
           </div>
           <div class="col-8">
             <table class='table table-borderless'>
-              <tr><th>商品名</th><td><%= @item.name %></td></tr>
+              <tr><th style="width: 30%">商品名</th><td><%= @item.name %></td></tr>
               <tr><th>商品説明</th><td><%= @item.introduction %></td></tr>
               <tr><th>ジャンル</th><td><%= @item.genre.name %></td></tr>
               <tr><th>税込み価格<br>(税抜き価格)</th><td class="align-middle"><%= ((@item.price * 1.1).floor).to_s(:delimited) %>&nbsp;(<%= @item.price.to_s(:delimited) %>)&nbsp;円</td></tr>
