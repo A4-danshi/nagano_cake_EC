@@ -10,12 +10,12 @@ InstagramのDMやメールで通販の注文を受けていたが、情報管理
 管理機能を含んだ通販サイトを開設しようと思い至った。  
 
 ## 使用したGem
-
+```
 gem 'devise'  
 gem 'kaminari','~> 1.2.1'  
 gem 'pry-byebug', group: :development  
 gem 'enum_help'  
-
+```
 ## **実装機能**
 
 ### 管理者側
@@ -43,7 +43,7 @@ gem 'enum_help'
 - 商品検索機能  
 
 ## 使用方法
-
+```
  $git clone git@github.com:A4-danshi/nagano_cake_EC.git  
  $cd ディレクトリ  
  $rails db:migrate  
@@ -52,22 +52,22 @@ gem 'enum_help'
  $bundle install  
  $yarn add @babel/plugin-proposal-private-methods @babel/plugin-proposal-private-property-in-object  
  $rails s  
-
+```
 ### 【顧客(会員)ページのログイン方法(customers/sign_in)】
 
-ヘッダーのログインボタンを押してください。  
-
-顧客ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
-(新規登録も可能です)  
-
-メールアドレス：test1@test.com  
-パスワード：password
+> ヘッダーのログインボタンを押してください。  
+> 
+> 顧客ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
+> (新規登録も可能です)  
+> 
+> メールアドレス：test1@test.com  
+> パスワード：password
 
 ### 【管理者ページのログイン方法(admin/sign_in)】
 
-/admin/sign_inにアクセスしてください  
-
-管理者ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
-
-メールアドレス：admin@admin  
-パスワード：a4a4a4
+> /admin/sign_inにアクセスしてください  
+> 
+> 管理者ページのログインに必要なメールアドレス及びパスワードは下記の通りです。  
+> 
+> メールアドレス：admin@admin  
+> パスワード：a4a4a4
